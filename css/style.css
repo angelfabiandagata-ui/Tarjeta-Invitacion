@@ -54,6 +54,23 @@ color: white; /* Color de texto para el contenido superpuesto */
 text-align: center;
 box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Opcional: Sutil sombra */
 }
+
+
+        /* ESTILO CONSOLIDADO Y FADE-IN PARA LA IMAGEN DE NOMBRES */
+        .imgNombres {
+            height: auto;
+            width: 100%; /* Ocupa el 100% de su contenedor */
+            max-width: 800px; /* Limita el tamaño en desktop */
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+
+            /* ESTADO INICIAL PARA EL FADE */
+            opacity: 0;
+            transition: opacity 2s ease-in-out; /* Duración de la transición */
+        }
+        /* ESTADO FINAL QUE DISPARA JS */
+        .imgNombres.loaded {
+            opacity: 1; /* Transición a visible */
+        }
 .contenedor-superior .overlay-texto {
 background-color: rgba(0, 0, 0, 0.2); /* Fondo semitransparente para que el texto resalte */
 padding: 20px 40px;
@@ -102,11 +119,22 @@ font-family: var(--font-serif);
 font-style: italic;
 }
 
-.imgNombres{
-height: auto;
-width: 100%; /* AHORA ES RESPONSIVO: Ocupa el 100% de su contenedor */
-max-width: 800px; /* Pero no se estira más allá de 800px en pantallas grandes */
-}
+   .reveal-section {
+            /* Estado inicial: invisible y ligeramente desplazado hacia abajo */
+            opacity: 0;
+            transform: translateY(30px);
+            /* Transición suave para la aparición */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition-delay: 0.1s; /* Ligero retraso */
+        }
+
+        /* Estado final: visible y en posición */
+        .reveal-section.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ------------------------------------------- */
+
 
 /* 5. Estilo general para todos los contenedores de contenido */
 .contenedor-invitacion,

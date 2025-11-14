@@ -19,7 +19,7 @@
         
        
         
-        <div class="contenedor-invitacion">
+        <div class="contenedor-invitacion reveal-section">
             <img id="imgAnillos" src="./images/anillos1.jpg" alt="anillos">
             <h2>CEREMONIA Y FIESTA</h2>
             <p>
@@ -33,31 +33,75 @@
             <button onclick="">Como llegar</button>
         </div>
         
-        <div class="contenedor-regalos">
+        <div class="contenedor-regalos reveal-section" >
             <img id="imgRegalo" src="./images/regalo1.jpg" alt="regalo">
             <p> Si deseás realizarnos un regalo, podés colaborar con nuestra Luna de Miel…</p>
             <button onclick="">Ver datos bancarios</button>
         </div>
         
-        <div class="contenedor-vestimenta">
+        <div class="contenedor-vestimenta reveal-section">
             <img id="imgVestimenta" src="./images/vestimenta1.png" alt="vestimenta">
             <h2>DRESS CODE</h2>
             <p>Elegante</p>
         </div>
         
         
-        <div class="contenedor-asistencia">
+        <div class="contenedor-asistencia reveal-section">
             <h2>CONFIRMACIÓN DE ASISTENCIA</h2>
             <p> Esperamos que seas parte de esta gran celebración.<br> ¡Confirmanos tu asistencia!</p>
             <button onclick="">Confirmar Asistencia</button>
         </div>
         
-        <div class="contenedor-saludo">
+        <div class="contenedor-saludo reveal-section">
             <p>¡Gracias por acompañarnos en este momento tan <br>importante!</p>
         </div>
 
     </div> <footer>
         <p>Invitaciones Digitales Momentos Unicos. Todos los derechos reservados</p>
     </footer>
+
+    <script>
+     document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. FADE-IN DE IMAGEN DE NOMBRES (Portada) ---
+            const nameImage = document.querySelector('.imgNombres');
+            
+            const revealNameImage = () => {
+                if (nameImage) {
+                    nameImage.classList.add('loaded'); 
+                }
+            };
+
+            if (nameImage) {
+                nameImage.onload = revealNameImage;
+                if (nameImage.complete) {
+                    revealNameImage();
+                }
+            }
+
+            // --- 2. SCROLL REVEAL (Aparición de Secciones) ---
+            const sectionsToReveal = document.querySelectorAll('.reveal-section');
+
+            const observerOptions = {
+                root: null, // Observa el viewport
+                rootMargin: '0px',
+                threshold: 0.15 // Se activa cuando el 15% del elemento es visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Cuando el elemento entra en el viewport, añade la clase 'appear'
+                        entry.target.classList.add('appear');
+                        // Deja de observar el elemento, ya no necesita animarse
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sectionsToReveal.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
